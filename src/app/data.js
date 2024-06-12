@@ -2,41 +2,55 @@ import { RxDashboard } from "react-icons/rx";
 import { FaServicestack, FaTruckPickup } from "react-icons/fa6";
 import { MdOutlineEvent } from "react-icons/md";
 
-export const sidebarLinksDistrictAdmin = [
+export const dataSimulation = [
   {
-    linkText: `Simulation 1`,
-    linkTo: "/dashboard/simulation/1",
+    linkText: `Credit Score`,
+    linkTo: "/dashboard/simulation/credit-score",
     linkIcon: <RxDashboard />,
+    description:
+      "This is a description of the simulation. Each card contains a unique heading and paragraph describing different types of Monte Carlo simulations.",
   },
   {
-    linkText: `Simulation 2`,
-    linkTo: "/dashboard/simulation/2",
+    linkText: `Macroeconomic Factors `,
+    linkTo: "/dashboard/simulation/macroeconomic-factors",
     linkIcon: <RxDashboard />,
+    description:
+      "This is a description of the simulation. Each card contains a unique heading and paragraph describing different types of Monte Carlo simulations.",
   },
   {
-    linkText: `Simulation 3`,
-    linkTo: "/dashboard/simulation/3",
+    linkText: `Financial Behavior`,
+    linkTo: "/dashboard/simulation/financial-behavior",
     linkIcon: <RxDashboard />,
+    description:
+      "This is a description of the simulation. Each card contains a unique heading and paragraph describing different types of Monte Carlo simulations.",
   },
 
   {
-    linkText: `Simulation 4`,
-    linkTo: "/dashboard/simulation/4",
+    linkText: `Employment Status`,
+    linkTo: "/dashboard/simulation/employment-status",
     linkIcon: <RxDashboard />,
+    description:
+      "This is a description of the simulation. Each card contains a unique heading and paragraph describing different types of Monte Carlo simulations.",
   },
   {
-    linkText: `Simulation 5`,
-    linkTo: "/dashboard/simulation/5",
+    linkText: `Geographic Location`,
+    linkTo: "/dashboard/simulation/geographic-location",
     linkIcon: <RxDashboard />,
+    description:
+      "This is a description of the simulation. Each card contains a unique heading and paragraph describing different types of Monte Carlo simulations.",
   },
   {
-    linkText: `Simulation 6`,
-    linkTo: "/dashboard/simulation/6",
+    linkText: `Age Demographics `,
+    linkTo: "/dashboard/simulation/age-demographics",
     linkIcon: <RxDashboard />,
+    description:
+      "This is a description of the simulation. Each card contains a unique heading and paragraph describing different types of Monte Carlo simulations.",
   },
   {
-    linkText: `Simulation 7`,
-    linkTo: "/dashboard/simulation/7",
+    linkText: `Health Insurance`,
+    linkTo: "/dashboard/simulation/health-insurance",
     linkIcon: <RxDashboard />,
+    description:
+      "This is a description of the simulation. Each card contains a unique heading and paragraph describing different types of Monte Carlo simulations.",
   },
 ];

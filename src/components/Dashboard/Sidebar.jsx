@@ -1,7 +1,6 @@
 "use client";
 import React, { useRef, useState } from "react";
 import Link from "next/link";
-import { useStateContext } from "@/app/StateContext";
 import { usePathname } from "next/navigation";
 
 const Sidebar = ({ sidebarLinks }) => {
@@ -14,13 +13,16 @@ const Sidebar = ({ sidebarLinks }) => {
   return (
     <aside
       ref={sidebar}
-      className={`font-poppins absolute left-0 top-0 z-9999 flex h-screen w-[25%] flex-col overflow-y-hidden bg-black text-[#fff] duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0 ${
+      className={`font-poppins absolute left-0 top-0 z-9999 flex h-screen w-[28%] flex-col overflow-y-hidden bg-black text-[#fff] duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0 ${
         sidebarOpen ? "translate-x-0" : "-translate-x-full"
       }`}
     >
-      <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
-        <Link href="/" className=" flex justify-center items-center gap-3 mt-5">
-          <h1 className="text-[#fff] text-lg font-semibold">
+      <div className="flex items-center justify-between gap-2 px-4 py-5.5 lg:py-6.5">
+        <Link
+          href="/"
+          className=" flex justify-center items-center  w-full mt-5"
+        >
+          <h1 className="text-[#000] rounded-md text-xl bg-[#fff] w-full text-center  py-3 font-semibold">
             Credit Card Assesment
           </h1>
         </Link>
@@ -53,17 +55,15 @@ const Sidebar = ({ sidebarLinks }) => {
         <nav className="mt-5 py-4 px-4 lg:mt-9 lg:px-3">
           {/* <!-- Menu Group --> */}
           <div>
-            <ul className="mb-6 flex flex-col gap-1.5">
+            <ul className="mb-6 flex flex-col gap-y-4">
               {sidebarLinks.map((item, index) => (
                 <Link
                   href={item.linkTo}
                   key={index}
-                  // className={` ${"bg-[#f1f1f138]"}  cursor-pointer relative flex items-center gap-2.5 rounded-md py-2 px-4 font-medium duration-300 ease-in-out hover:bg-[#f1f1f138] `}
                   className={` ${
-                    pathname === item.linkTo && "bg-[#f1f1f138]"
-                  }  cursor-pointer relative flex items-center gap-2.5 rounded-md py-2 px-4 font-medium duration-300 ease-in-out hover:bg-[#f1f1f138] `}
+                    pathname === item.linkTo && "bg-[#ffffff5d]"
+                  }  cursor-pointer text-lg relative flex items-center gap-2.5 rounded-md py-2 px-4 font-medium duration-300 ease-in-out hover:bg-[#f1f1f138] `}
                 >
-                  <span className="text-[20px]">{item.linkIcon}</span>{" "}
                   <span> {item.linkText}</span>
                 </Link>
               ))}

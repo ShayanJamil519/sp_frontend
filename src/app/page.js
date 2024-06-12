@@ -1,3 +1,5 @@
+import { dataSimulation } from "./data";
+
 export default function Home() {
   return (
     <div className="w-full">
@@ -6,16 +8,12 @@ export default function Home() {
           Monte Carlo Simulations
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
-          {[...Array(7)].map((_, index) => (
+          {dataSimulation.map((item, index) => (
             <div key={index} className="bg-white shadow-md rounded-lg p-6">
-              <h2 className="text-2xl font-semibold mb-2">
-                Simulation {index + 1}
+              <h2 className="text-lg font-semibold mb-2">
+                Simulation# {index + 1}: {item.linkText}
               </h2>
-              <p className="text-gray-700">
-                This is a description of the simulation. Each card contains a
-                unique heading and paragraph describing different types of Monte
-                Carlo simulations.
-              </p>
+              <p className="text-gray-700">{item.description}</p>
             </div>
           ))}
         </div>
