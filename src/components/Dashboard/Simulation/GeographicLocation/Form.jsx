@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { IoIosArrowRoundForward } from "react-icons/io";
-import { FaChevronDown, FaUpload } from "react-icons/fa6";
+import { FaChevronDown } from "react-icons/fa6";
 
 import { FaSpinner } from "react-icons/fa";
 import Input from "@/components/Shared/Input";
@@ -12,15 +12,16 @@ import apiUrl from "@/utils/baseURL";
 
 const Form = ({ setApiData }) => {
   const [isLoading, setIsLoading] = useState(false);
-
   const [formData, setFormData] = useState({});
+
+  console.log({ formData });
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
 
     setFormData({
       ...formData,
-      [name]: Number(value),
+      [name]: name === "region" ? value : Number(value),
     });
   };
 
@@ -30,7 +31,7 @@ const Form = ({ setApiData }) => {
     setIsLoading(true);
     try {
       const response = await axios.post(
-        `${apiUrl}/simulate_financial_behavior`,
+        `${apiUrl}/simulate_geographic_location`,
         formData
       );
 
@@ -38,6 +39,8 @@ const Form = ({ setApiData }) => {
 
       setIsLoading(false);
     } catch (error) {
+      console.log(error);
+
       toast.error(error.response.data.message);
     } finally {
       setIsLoading(false);
@@ -66,47 +69,62 @@ const Form = ({ setApiData }) => {
             min={300}
             max={850}
             pattern="^\d+$"
-            placeholder="The initial credit score"
+            placeholder="The credit score of the individual"
             onChange={handleInputChange}
           />
 
           <Input
-            name="spending_habits"
-            label="Enter spending habits"
+            name="housing_market_trends"
+            label="Enter housing market trends "
             type="number"
             required={true}
-            min={0}
+            min={1}
             max={10}
             pattern="^\d+$"
-            placeholder="A score representing spending habits (0-10)"
+            placeholder="A score (1 to 10) indicating housing market trends"
             onChange={handleInputChange}
           />
         </div>
 
         <div className="w-full flex flex-col gap-y-3">
           <Input
-            name="payment_history"
-            label="Enter payment history"
+            name="regional_unemployment_rate"
+            label="Enter regional unemployment rate  "
             type="number"
             required={true}
             min={0}
-            max={100}
             pattern="^\d+$"
-            placeholder="Payment history percentage (0-100)"
+            placeholder="The regional unemployment rate as a percentage"
             onChange={handleInputChange}
           />
 
-          <Input
-            name="debt_to_income_ratio"
-            label="Enter spend habits"
-            type="number"
-            required={true}
-            min={0}
-            max={100}
-            pattern="^\d+$"
-            placeholder="Debt-to-income ratio percentage"
-            onChange={handleInputChange}
-          />
+          <div>
+            <label
+              htmlFor="region"
+              className="font-semibold text-sm text-[#202725] mb-1"
+            >
+              Select region{" "}
+            </label>
+
+            <div className="relative inline-block w-full cursor-pointer">
+              <select
+                id="region"
+                name="region"
+                required
+                onChange={handleInputChange}
+                className="outline-none appearance-none text-sm  p-4 w-full rounded-md border-2 border-[#d9e4df] "
+              >
+                {["urban", "suburban", "rural"].map((item, index) => (
+                  <option value={item} key={index} className="text-[#202725]">
+                    {item}
+                  </option>
+                ))}
+              </select>
+              <div className="pointer-events-none absolute inset-y-0 right-2 text-[16px] flex items-center px-2 text-[#202725]">
+                <FaChevronDown />
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className="grid place-items-center ">

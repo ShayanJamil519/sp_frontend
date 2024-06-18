@@ -6,52 +6,60 @@ import ReactApexChart from "react-apexcharts";
 //   ssr: false,
 // });
 
-const options = {
-  chart: {
-    type: "donut",
-  },
-  colors: ["#10B981", "#375E83", "#259AE6", "#FFA70B"],
-  labels: ["Metalloids", "Other", "Plastic", "Glass"],
-  legend: {
-    show: true,
-    position: "bottom",
-  },
+const ChartThree = ({ apiData }) => {
+  const { market_factor, region_factor, risk_score, unemployment_factor } =
+    apiData?.regional_risk;
 
-  plotOptions: {
-    pie: {
-      donut: {
-        size: "65%",
-        background: "transparent",
-      },
-    },
-  },
-  dataLabels: {
-    enabled: false,
-  },
-  responsive: [
-    {
-      breakpoint: 2600,
-      options: {
-        chart: {
-          width: 380,
-        },
-      },
-    },
-    {
-      breakpoint: 640,
-      options: {
-        chart: {
-          width: 200,
-        },
-      },
-    },
-  ],
-};
-
-const ChartThree = () => {
   const [state, setState] = useState({
-    series: [65, 34, 12, 56],
+    series: [market_factor, region_factor, risk_score, unemployment_factor],
   });
+
+  const options = {
+    chart: {
+      type: "donut",
+    },
+    colors: ["#10B981", "#375E83", "#259AE6", "#FFA70B"],
+    labels: [
+      "market_factor",
+      "region_factor",
+      "risk_score",
+      "unemployment_factor",
+    ],
+    legend: {
+      show: true,
+      position: "bottom",
+    },
+
+    plotOptions: {
+      pie: {
+        donut: {
+          size: "65%",
+          background: "transparent",
+        },
+      },
+    },
+    dataLabels: {
+      enabled: false,
+    },
+    responsive: [
+      {
+        breakpoint: 2600,
+        options: {
+          chart: {
+            width: 380,
+          },
+        },
+      },
+      {
+        breakpoint: 640,
+        options: {
+          chart: {
+            width: 200,
+          },
+        },
+      },
+    ],
+  };
 
   return (
     <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pt-7 pb-5  sm:px-7 xl:col-span-5 font-poppins">

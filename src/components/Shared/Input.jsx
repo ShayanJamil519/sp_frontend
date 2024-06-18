@@ -8,6 +8,9 @@ const Input = ({
   placeholder,
   onChange,
   require,
+  min,
+  max,
+  pattern,
 }) => {
   return (
     <div className="">
@@ -15,6 +18,9 @@ const Input = ({
       <input
         name={name}
         type={type}
+        min={min}
+        max={max}
+        pattern={pattern}
         value={value}
         onChange={onChange}
         required={require}
