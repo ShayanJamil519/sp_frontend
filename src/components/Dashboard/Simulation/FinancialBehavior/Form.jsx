@@ -51,10 +51,13 @@ const Form = ({ setApiData }) => {
       }}
       className=" sm:p-10 px-4 w-full mx-auto py-7  font-poppins bg-[#fff] "
     >
-      <h1 className="font-bold text-2xl">Make a request</h1>
+      <h1 className="font-bold text-2xl">Simulate Financial Behavior</h1>
       <p className="text-sm mt-3 leading-6 text-[#62706b]">
-        Please complete the form below, to request a quote, and we’ll be in
-        touch. Or you can call us and our specialists will provide help!
+        This simulation examines the impact of financial behavior on credit
+        risk. Factors such as spending habits, savings patterns, and debt
+        management are analyzed to predict changes in credit scores. By
+        understanding these behaviors, we can gain insights into how personal
+        finance decisions affect overall credit health.
       </p>
       <form className="w-full  mt-10 " onSubmit={handleSubmit}>
         <div className="w-full flex flex-col gap-y-3 mb-3">
@@ -125,7 +128,7 @@ const Form = ({ setApiData }) => {
               disabled={isLoading}
               className="mt-3 sm:mt-6 w-full flex justify-center items-center font-semibold text-sm gap-3 bg-[#20332c] transition duration-500 ease-in-out hover:bg-[#257830] text-[#fff] hover:text-[#fff] outline-none border-0 px-7 py-5 rounded-md sm:rounded-sm"
             >
-              Submit Complain
+              Calculate Financial Factors
               <span className="p-0 rounded-full bg-[#fff] transition duration-500 text-[#20332c]">
                 <IoIosArrowRoundForward className="text-[27px] font-bold" />
               </span>{" "}

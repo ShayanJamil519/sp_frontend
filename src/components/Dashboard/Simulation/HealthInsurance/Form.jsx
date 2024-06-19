@@ -58,12 +58,16 @@ const Form = ({ setApiData }) => {
       style={{
         boxShadow: "0px 5px 43px 0px rgba(17, 29, 25, 0.12)",
       }}
-      className=" sm:p-10 px-4 w-[90%] mx-auto py-7  font-poppins bg-[#fff] "
+      className=" sm:p-10 px-4  mx-auto py-7  font-poppins bg-[#fff] "
     >
-      <h1 className="font-bold text-2xl">Make a request</h1>
+      <h1 className="font-bold text-2xl">Health Insurance</h1>
       <p className="text-sm mt-3 leading-6 text-[#62706b]">
-        Please complete the form below, to request a quote, and we’ll be in
-        touch. Or you can call us and our specialists will provide help!
+        Health insurance coverage can have significant financial implications,
+        affecting credit risk. This simulation investigates how health insurance
+        status and related medical expenses influence credit scores. By
+        understanding the correlation between health insurance and financial
+        stability, we can better assess the credit risk associated with
+        healthcare costs.
       </p>
       <form className="w-full  mt-10 " onSubmit={handleSubmit}>
         <div className="w-full flex flex-col gap-y-3 mb-3">
@@ -148,7 +152,7 @@ const Form = ({ setApiData }) => {
               disabled={isLoading}
               className="mt-3 sm:mt-6 w-full flex justify-center items-center font-semibold text-sm gap-3 bg-[#20332c] transition duration-500 ease-in-out hover:bg-[#257830] text-[#fff] hover:text-[#fff] outline-none border-0 px-7 py-5 rounded-md sm:rounded-sm"
             >
-              Calculate Demographic Impact
+              Calculate Health Insurance Factors
               <span className="p-0 rounded-full bg-[#fff] transition duration-500 text-[#20332c]">
                 <IoIosArrowRoundForward className="text-[27px] font-bold" />
               </span>{" "}

@@ -58,12 +58,15 @@ const Form = ({ setApiData }) => {
       style={{
         boxShadow: "0px 5px 43px 0px rgba(17, 29, 25, 0.12)",
       }}
-      className=" sm:p-10 px-4 w-[90%] mx-auto py-7  font-poppins bg-[#fff] "
+      className=" sm:p-10 px-4  mx-auto py-7  font-poppins bg-[#fff] "
     >
-      <h1 className="font-bold text-2xl">Make a request</h1>
+      <h1 className="font-bold text-2xl">Age Demographics</h1>
       <p className="text-sm mt-3 leading-6 text-[#62706b]">
-        Please complete the form below, to request a quote, and we’ll be in
-        touch. Or you can call us and our specialists will provide help!
+        Age demographics play a crucial role in credit risk assessment. This
+        simulation explores how age-related factors, such as financial maturity,
+        retirement planning, and lifecycle events, impact credit scores. By
+        analyzing different age groups, we can identify trends and risks unique
+        to various stages of life.
       </p>
       <form className="w-full  mt-10 " onSubmit={handleSubmit}>
         <div className="w-full flex flex-col gap-y-3 mb-3">
