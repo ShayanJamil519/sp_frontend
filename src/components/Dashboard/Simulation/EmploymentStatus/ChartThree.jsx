@@ -72,6 +72,7 @@ const ChartOne = ({ apiData }) => {
   return (
     <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pt-7 pb-5 shadow-sm sm:px-7 ">
       <div>
+        <div className="text-3xl font-bold pb-2">Bar Graph</div>
         <div id="chartOne" className="-ml-5 h-[355px] w-[105%]">
           <ReactApexChart
             options={state.options}

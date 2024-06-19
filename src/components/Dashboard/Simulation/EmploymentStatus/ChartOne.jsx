@@ -144,7 +144,7 @@ const ChartOne = ({ apiData }) => {
     <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pt-7 pb-5 shadow-sm sm:px-7 ">
       <div className="flex flex-wrap items-start justify-between gap-3 sm:flex-nowrap">
         <div className="flex w-full flex-wrap gap-3 sm:gap-5">
-          <div></div>
+          <div className="text-3xl font-bold pb-2">Area Chart</div>
         </div>
       </div>
 

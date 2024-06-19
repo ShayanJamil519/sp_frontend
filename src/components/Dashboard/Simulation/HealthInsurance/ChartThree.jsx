@@ -75,7 +75,7 @@ const ChartThree = ({ apiData }) => {
       <div className="mb-3 justify-between gap-4 sm:flex">
         <div>
           <h5 className="text-xl font-semibold text-black dark:text-white">
-            Waste Recycling Analytics Analytics
+            Pie Chart
           </h5>
         </div>
       </div>
