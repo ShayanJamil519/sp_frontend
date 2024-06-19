@@ -30,7 +30,7 @@ const Form = ({ setApiData }) => {
     setIsLoading(true);
     try {
       const response = await axios.post(
-        `${apiUrl}/simulate_financial_behavior`,
+        `${apiUrl}/simulate_macroeconomic_factors`,
         formData
       );
 
@@ -51,10 +51,12 @@ const Form = ({ setApiData }) => {
       }}
       className=" sm:p-10 px-4 w-full mx-auto py-7  font-poppins bg-[#fff] "
     >
-      <h1 className="font-bold text-2xl">Make a request</h1>
+      <h1 className="font-bold text-2xl">Simulate Macroeconomic Factors</h1>
       <p className="text-sm mt-3 leading-6 text-[#62706b]">
-        Please complete the form below, to request a quote, and we’ll be in
-        touch. Or you can call us and our specialists will provide help!
+        Please complete the form below to calculate the projected credit scores
+        and yearly variances based on macroeconomic factors. Provide the initial
+        credit score, the number of simulations, and the number of years to
+        simulate.
       </p>
       <form className="w-full  mt-10 " onSubmit={handleSubmit}>
         <div className="w-full flex flex-col gap-y-3 mb-3">
@@ -66,45 +68,32 @@ const Form = ({ setApiData }) => {
             min={300}
             max={850}
             pattern="^\d+$"
-            placeholder="The initial credit score"
+            placeholder="The credit score of the individual"
             onChange={handleInputChange}
           />
 
           <Input
-            name="spending_habits"
-            label="Enter spending habits"
+            name="num_simulations"
+            label="Enter number of simulations"
             type="number"
             required={true}
             min={0}
-            max={10}
             pattern="^\d+$"
-            placeholder="A score representing spending habits (0-10)"
+            placeholder="The number of simulation iterations to perform"
             onChange={handleInputChange}
           />
         </div>
 
         <div className="w-full flex flex-col gap-y-3">
           <Input
-            name="payment_history"
-            label="Enter payment history"
+            name="num_years"
+            label="Enter number of years"
             type="number"
             required={true}
             min={0}
             max={100}
             pattern="^\d+$"
-            placeholder="Payment history percentage (0-100)"
-            onChange={handleInputChange}
-          />
-
-          <Input
-            name="debt_to_income_ratio"
-            label="Enter spend habits"
-            type="number"
-            required={true}
-            min={0}
-            max={100}
-            pattern="^\d+$"
-            placeholder="Debt-to-income ratio percentage"
+            placeholder="The number of years to simulate"
             onChange={handleInputChange}
           />
         </div>
@@ -125,7 +114,7 @@ const Form = ({ setApiData }) => {
               disabled={isLoading}
               className="mt-3 sm:mt-6 w-full flex justify-center items-center font-semibold text-sm gap-3 bg-[#20332c] transition duration-500 ease-in-out hover:bg-[#257830] text-[#fff] hover:text-[#fff] outline-none border-0 px-7 py-5 rounded-md sm:rounded-sm"
             >
-              Submit Complain
+              Calculate Macroeconomic Factors
               <span className="p-0 rounded-full bg-[#fff] transition duration-500 text-[#20332c]">
                 <IoIosArrowRoundForward className="text-[27px] font-bold" />
               </span>{" "}

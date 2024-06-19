@@ -52,7 +52,7 @@ const Form = ({ setApiData }) => {
       style={{
         boxShadow: "0px 5px 43px 0px rgba(17, 29, 25, 0.12)",
       }}
-      className=" sm:p-10 px-4 w-[90%] mx-auto py-7  font-poppins bg-[#fff] "
+      className=" sm:p-10 px-4  mx-auto py-7  font-poppins bg-[#fff] "
     >
       <h1 className="font-bold text-2xl">Make a request</h1>
       <p className="text-sm mt-3 leading-6 text-[#62706b]">

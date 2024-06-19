@@ -20,17 +20,17 @@ export const FinancialBehavior = () => {
 
   return (
     <div className="w-full h-full">
-      {apiData ? (
-        <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7 2xl:gap-7">
-          <ChartOne />
+      <Form setApiData={setApiData} />
 
-          <ChartTwo />
+      {apiData && (
+        <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7 2xl:gap-7">
+          <ChartOne apiData={apiData} />
+
+          {/* <ChartTwo /> */}
           <div className="col-span-12 xl:col-span-12 w-full">
             <ChartThree apiData={apiData} />
           </div>
         </div>
-      ) : (
-        <Form setApiData={setApiData} />
       )}
     </div>
   );
