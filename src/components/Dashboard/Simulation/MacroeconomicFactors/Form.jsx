@@ -90,8 +90,8 @@ const Form = ({ setApiData }) => {
             label="Enter number of years"
             type="number"
             required={true}
-            min={0}
-            max={100}
+            min={1}
+            max={10}
             pattern="^\d+$"
             placeholder="The number of years to simulate"
             onChange={handleInputChange}

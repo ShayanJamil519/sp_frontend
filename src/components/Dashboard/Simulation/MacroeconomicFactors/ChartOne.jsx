@@ -1,37 +1,48 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 
 const ChartOne = ({ apiData }) => {
-  const { projected_credit_scores, yearly_variance } = apiData;
-
-  const formattedDataProjectedCreditScores = projected_credit_scores?.map(
-    (num) => parseFloat(num.toFixed(2))
-  );
-
-  const formattedDataYearlyVariance = yearly_variance?.map((num) =>
-    parseFloat(num.toFixed(2))
-  );
-
   const [state, setState] = useState({
     series: [
       {
         name: "Projected Credit Scores",
-        data: formattedDataProjectedCreditScores,
+        data: [],
       },
-
       {
         name: "Yearly Variance",
-        data: formattedDataYearlyVariance,
+        data: [],
       },
     ],
   });
 
-  const allData = [
-    ...formattedDataProjectedCreditScores,
-    ...formattedDataYearlyVariance,
-  ];
+  useEffect(() => {
+    const { projected_credit_scores, yearly_variance } = apiData;
+
+    const formattedDataProjectedCreditScores = projected_credit_scores?.map(
+      (num) => parseFloat(num.toFixed(2))
+    );
+
+    const formattedDataYearlyVariance = yearly_variance?.map((num) =>
+      parseFloat(num.toFixed(2))
+    );
+
+    setState({
+      series: [
+        {
+          name: "Projected Credit Scores",
+          data: formattedDataProjectedCreditScores,
+        },
+        {
+          name: "Yearly Variance",
+          data: formattedDataYearlyVariance,
+        },
+      ],
+    });
+  }, [apiData]);
+
+  const allData = [...state.series[0].data, ...state.series[1].data];
 
   const yMin = Math.min(...allData);
   const yMax = Math.max(...allData);
@@ -137,8 +148,10 @@ const ChartOne = ({ apiData }) => {
           fontSize: "0px",
         },
       },
-      min: yMin - 100,
-      max: yMax + 100,
+      // min: yMin - 100,
+      // max: yMax + 100,
+      min: yMin,
+      max: yMax,
     },
   };
 
