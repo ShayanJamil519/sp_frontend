@@ -12,7 +12,12 @@ import apiUrl from "@/utils/baseURL";
 
 const Form = ({ setApiData }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({
+    credit_score: 700,
+    housing_market_trends: 5,
+    regional_unemployment_rate: 5,
+    region: "urban",
+  });
 
   console.log({ formData });
 
