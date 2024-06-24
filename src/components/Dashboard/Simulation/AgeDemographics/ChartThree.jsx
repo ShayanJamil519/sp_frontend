@@ -1,18 +1,22 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactApexChart from "react-apexcharts";
-// import dynamic from "next/dynamic";
-// const ReactApexChart = dynamic(() => import("react-apexcharts"), {
-//   ssr: false,
-// });
 
 const ChartThree = ({ apiData }) => {
   const { age_factor, education_factor, impact_score, marital_factor } =
     apiData?.demographic_impact;
 
   const [state, setState] = useState({
-    series: [age_factor, education_factor, impact_score, marital_factor],
+    series: [],
   });
+
+  useEffect(() => {
+    if (apiData?.demographic_impact) {
+      setState({
+        series: [age_factor, education_factor, impact_score, marital_factor],
+      });
+    }
+  }, [apiData]);
 
   const options = {
     chart: {

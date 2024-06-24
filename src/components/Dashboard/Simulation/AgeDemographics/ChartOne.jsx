@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactApexChart from "react-apexcharts";
 
 const ChartOne = ({ apiData }) => {
@@ -67,13 +67,18 @@ const ChartOne = ({ apiData }) => {
     },
   });
 
-  const handleReset = () => {
-    setState((prevState) => ({
-      ...prevState,
-    }));
-  };
-
-  handleReset;
+  useEffect(() => {
+    if (apiData?.demographic_impact) {
+      setState((prevState) => ({
+        ...prevState,
+        series: [
+          {
+            data: formattedData,
+          },
+        ],
+      }));
+    }
+  }, [apiData]);
 
   return (
     <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pt-7 pb-5 shadow-sm sm:px-7 ">
