@@ -1,20 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 
 const ChartOne = ({ apiData }) => {
-  const { income_projection } = apiData;
-
-  const incomes = income_projection?.map((item) =>
-    parseFloat(item.income.toFixed(2))
-  );
-  const years = income_projection?.map((item) => item.year);
-
   const [state, setState] = useState({
     series: [
       {
-        data: incomes,
+        data: [],
       },
     ],
     options: {
@@ -38,7 +31,7 @@ const ChartOne = ({ apiData }) => {
         colors: ["transparent"],
       },
       xaxis: {
-        categories: years,
+        categories: [],
         title: {
           text: "Years",
         },
@@ -61,13 +54,30 @@ const ChartOne = ({ apiData }) => {
     },
   });
 
-  const handleReset = () => {
-    setState((prevState) => ({
-      ...prevState,
-    }));
-  };
+  useEffect(() => {
+    if (apiData?.income_projection) {
+      const incomes = apiData.income_projection.map((item) =>
+        parseFloat(item.income.toFixed(2))
+      );
+      const years = apiData.income_projection.map((item) => item.year);
 
-  handleReset;
+      setState((prevState) => ({
+        ...prevState,
+        series: [
+          {
+            data: incomes,
+          },
+        ],
+        options: {
+          ...prevState.options,
+          xaxis: {
+            ...prevState.options.xaxis,
+            categories: years,
+          },
+        },
+      }));
+    }
+  }, [apiData]);
 
   return (
     <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pt-7 pb-5 shadow-sm sm:px-7 ">

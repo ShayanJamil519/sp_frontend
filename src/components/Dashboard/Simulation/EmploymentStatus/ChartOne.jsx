@@ -1,144 +1,154 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 
 const ChartOne = ({ apiData }) => {
-  const { income_projection } = apiData;
-
-  const incomes = income_projection?.map((item) =>
-    parseFloat(item.income.toFixed(2))
-  );
-  const years = income_projection?.map((item) => item.year);
-
   const [state, setState] = useState({
     series: [
       {
         name: "Incomes",
-        data: incomes,
+        data: [],
       },
     ],
-  });
-
-  const yMin = Math.min(...incomes);
-  const yMax = Math.max(...incomes);
-
-  const options = {
-    legend: {
-      show: true,
-      position: "top",
-      horizontalAlign: "left",
-    },
-    colors: ["#80CAEE"],
-    chart: {
-      fontFamily: "Satoshi, sans-serif",
-      height: 335,
-      type: "area",
-      dropShadow: {
+    options: {
+      legend: {
+        show: true,
+        position: "top",
+        horizontalAlign: "left",
+      },
+      colors: ["#80CAEE"],
+      chart: {
+        fontFamily: "Satoshi, sans-serif",
+        height: 335,
+        type: "area",
+        dropShadow: {
+          enabled: true,
+          color: "#623CEA14",
+          top: 10,
+          blur: 4,
+          left: 0,
+          opacity: 0.1,
+        },
+        toolbar: {
+          show: false,
+        },
+      },
+      responsive: [
+        {
+          breakpoint: 1024,
+          options: {
+            chart: {
+              height: 300,
+            },
+          },
+        },
+        {
+          breakpoint: 1366,
+          options: {
+            chart: {
+              height: 350,
+            },
+          },
+        },
+      ],
+      stroke: {
+        width: [2, 2],
+        curve: "straight",
+      },
+      grid: {
+        xaxis: {
+          lines: {
+            show: true,
+          },
+          title: {
+            text: "Years",
+          },
+          labels: {
+            show: true,
+          },
+        },
+        yaxis: {
+          lines: {
+            show: true,
+          },
+          title: {
+            text: "Incomes",
+          },
+        },
+      },
+      dataLabels: {
         enabled: true,
-        color: "#623CEA14",
-        top: 10,
-        blur: 4,
-        left: 0,
-        opacity: 0.1,
       },
-
-      toolbar: {
-        show: false,
-      },
-    },
-    responsive: [
-      {
-        breakpoint: 1024,
-        options: {
-          chart: {
-            height: 300,
-          },
+      markers: {
+        size: 4,
+        colors: "#fff",
+        strokeColors: ["#3056D3", "#80CAEE"],
+        strokeWidth: 3,
+        strokeOpacity: 0.9,
+        strokeDashArray: 0,
+        fillOpacity: 1,
+        discrete: [],
+        hover: {
+          size: undefined,
+          sizeOffset: 5,
         },
       },
-      {
-        breakpoint: 1366,
-        options: {
-          chart: {
-            height: 350,
-          },
-        },
-      },
-    ],
-    stroke: {
-      width: [2, 2],
-      curve: "straight",
-    },
-    // labels: {
-    //   show: false,
-    //   position: "top",
-    // },
-    grid: {
       xaxis: {
-        lines: {
-          show: true,
+        type: "category",
+        categories: [],
+        axisBorder: {
+          show: false,
         },
-        title: {
-          text: "Years",
-        },
-        labels: {
-          show: true,
+        axisTicks: {
+          show: false,
         },
       },
       yaxis: {
-        lines: {
-          show: true,
-        },
         title: {
-          text: "Incomes",
+          style: {
+            fontSize: "0px",
+          },
         },
+        min: 0,
+        max: 0,
       },
     },
-    dataLabels: {
-      enabled: true,
-    },
-    markers: {
-      size: 4,
-      colors: "#fff",
-      strokeColors: ["#3056D3", "#80CAEE"],
-      strokeWidth: 3,
-      strokeOpacity: 0.9,
-      strokeDashArray: 0,
-      fillOpacity: 1,
-      discrete: [],
-      hover: {
-        size: undefined,
-        sizeOffset: 5,
-      },
-    },
-    xaxis: {
-      type: "category",
-      categories: years,
-      axisBorder: {
-        show: false,
-      },
-      axisTicks: {
-        show: false,
-      },
-    },
-    yaxis: {
-      title: {
-        style: {
-          fontSize: "0px",
+  });
+
+  useEffect(() => {
+    if (apiData?.income_projection) {
+      const incomes = apiData.income_projection.map((item) =>
+        parseFloat(item.income.toFixed(2))
+      );
+      const years = apiData.income_projection.map((item) => item.year);
+
+      const yMin = Math.min(...incomes);
+      const yMax = Math.max(...incomes);
+
+      setState((prevState) => ({
+        ...prevState,
+        series: [
+          {
+            name: "Incomes",
+            data: incomes,
+          },
+        ],
+        options: {
+          ...prevState.options,
+          xaxis: {
+            ...prevState.options.xaxis,
+            categories: years,
+          },
+          yaxis: {
+            ...prevState.options.yaxis,
+            min: yMin - 100,
+            max: yMax + 100,
+          },
         },
-      },
-      min: yMin - 100,
-      max: yMax + 100,
-    },
-  };
-
-  const handleReset = () => {
-    setState((prevState) => ({
-      ...prevState,
-    }));
-  };
-
-  handleReset;
+      }));
+    }
+  }, [apiData]);
 
   return (
     <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pt-7 pb-5 shadow-sm sm:px-7 ">
@@ -151,7 +161,7 @@ const ChartOne = ({ apiData }) => {
       <div>
         <div id="chartOne" className="-ml-5 h-[355px] w-[105%]">
           <ReactApexChart
-            options={options}
+            options={state.options}
             series={state.series}
             type="area"
             width="100%"
