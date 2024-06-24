@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 // import dynamic from "next/dynamic";
 // const ReactApexChart = dynamic(() => import("react-apexcharts"), {
@@ -7,62 +7,76 @@ import ReactApexChart from "react-apexcharts";
 // });
 
 const ChartThree = ({ apiData }) => {
-  const { market_factor, region_factor, risk_score, unemployment_factor } =
-    apiData?.regional_risk;
-
   const [state, setState] = useState({
-    series: [market_factor, region_factor, risk_score, unemployment_factor],
+    series: [],
+    options: {
+      chart: {
+        type: "donut",
+      },
+      colors: ["#10B981", "#375E83", "#259AE6", "#FFA70B"],
+      labels: [
+        "market_factor",
+        "region_factor",
+        "risk_score",
+        "unemployment_factor",
+      ],
+      legend: {
+        show: true,
+        position: "bottom",
+      },
+      plotOptions: {
+        pie: {
+          donut: {
+            size: "65%",
+            background: "transparent",
+          },
+        },
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      responsive: [
+        {
+          breakpoint: 2600,
+          options: {
+            chart: {
+              width: 380,
+            },
+          },
+        },
+        {
+          breakpoint: 640,
+          options: {
+            chart: {
+              width: 200,
+            },
+          },
+        },
+      ],
+    },
   });
 
-  const options = {
-    chart: {
-      type: "donut",
-    },
-    colors: ["#10B981", "#375E83", "#259AE6", "#FFA70B"],
-    labels: [
-      "market_factor",
-      "region_factor",
-      "risk_score",
-      "unemployment_factor",
-    ],
-    legend: {
-      show: true,
-      position: "bottom",
-    },
+  useEffect(() => {
+    if (apiData?.regional_risk) {
+      const { market_factor, region_factor, risk_score, unemployment_factor } =
+        apiData.regional_risk;
 
-    plotOptions: {
-      pie: {
-        donut: {
-          size: "65%",
-          background: "transparent",
-        },
-      },
-    },
-    dataLabels: {
-      enabled: false,
-    },
-    responsive: [
-      {
-        breakpoint: 2600,
-        options: {
-          chart: {
-            width: 380,
-          },
-        },
-      },
-      {
-        breakpoint: 640,
-        options: {
-          chart: {
-            width: 200,
-          },
-        },
-      },
-    ],
-  };
+      const formattedData = [
+        parseFloat(market_factor),
+        parseFloat(region_factor),
+        parseFloat(risk_score),
+        parseFloat(unemployment_factor),
+      ];
+
+      setState((prevState) => ({
+        ...prevState,
+        series: formattedData,
+      }));
+    }
+  }, [apiData]);
 
   return (
-    <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pt-7 pb-5  sm:px-7 xl:col-span-5 font-poppins">
+    <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pt-7 pb-5 sm:px-7 xl:col-span-5 font-poppins">
       <div className="mb-3 justify-between gap-4 sm:flex">
         <div>
           <h5 className="text-xl font-semibold text-black dark:text-white">
@@ -75,7 +89,7 @@ const ChartThree = ({ apiData }) => {
       <div className="mb-2">
         <div id="chartThree" className="mx-auto flex justify-center">
           <ReactApexChart
-            options={options}
+            options={state.options}
             series={state.series}
             type="donut"
           />

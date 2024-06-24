@@ -1,23 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 
 const ChartOne = ({ apiData }) => {
-  const { market_factor, region_factor, risk_score, unemployment_factor } =
-    apiData?.regional_risk;
-
-  const formattedData = [
-    parseFloat(market_factor).toFixed(2),
-    parseFloat(region_factor).toFixed(2),
-    parseFloat(risk_score).toFixed(2),
-    parseFloat(unemployment_factor).toFixed(2),
-  ];
-
   const [state, setState] = useState({
     series: [
       {
-        data: formattedData,
+        data: [],
       },
     ],
     options: {
@@ -61,13 +51,28 @@ const ChartOne = ({ apiData }) => {
     },
   });
 
-  const handleReset = () => {
-    setState((prevState) => ({
-      ...prevState,
-    }));
-  };
+  useEffect(() => {
+    if (apiData?.regional_risk) {
+      const { market_factor, region_factor, risk_score, unemployment_factor } =
+        apiData.regional_risk;
 
-  handleReset;
+      const formattedData = [
+        parseFloat(market_factor).toFixed(2),
+        parseFloat(region_factor).toFixed(2),
+        parseFloat(risk_score).toFixed(2),
+        parseFloat(unemployment_factor).toFixed(2),
+      ];
+
+      setState((prevState) => ({
+        ...prevState,
+        series: [
+          {
+            data: formattedData,
+          },
+        ],
+      }));
+    }
+  }, [apiData]);
 
   return (
     <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pt-7 pb-5 shadow-sm sm:px-7 ">
