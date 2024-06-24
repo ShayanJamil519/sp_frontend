@@ -1,34 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 
 const ChartOne = ({ apiData }) => {
-  console.log("apiData: ", apiData);
-  const {
-    condition_factor,
-    coverage_factor,
-    health_risk_score,
-    insurance_factor,
-  } = apiData?.health_risk;
-
-  console.log("apiData?.health_risk: ", apiData?.health_risk);
-  console.log("data: ", {
-    condition_factor,
-    coverage_factor,
-    health_risk_score,
-    insurance_factor,
-  });
-
   const [state, setState] = useState({
     series: [
       {
-        data: [
-          condition_factor,
-          coverage_factor,
-          health_risk_score,
-          insurance_factor,
-        ],
+        data: [],
       },
     ],
     options: {
@@ -76,6 +55,31 @@ const ChartOne = ({ apiData }) => {
       },
     },
   });
+
+  useEffect(() => {
+    if (apiData?.health_risk) {
+      const {
+        condition_factor,
+        coverage_factor,
+        health_risk_score,
+        insurance_factor,
+      } = apiData.health_risk;
+
+      setState((prevState) => ({
+        ...prevState,
+        series: [
+          {
+            data: [
+              condition_factor,
+              coverage_factor,
+              health_risk_score,
+              insurance_factor,
+            ],
+          },
+        ],
+      }));
+    }
+  }, [apiData]);
 
   return (
     <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pt-7 pb-5 shadow-sm sm:px-7 ">

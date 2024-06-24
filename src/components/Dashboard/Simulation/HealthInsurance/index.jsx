@@ -18,6 +18,8 @@ const ChartThree = dynamic(() => import("./ChartThree"), {
 export const HealthInsurance = () => {
   const [apiData, setApiData] = useState(null);
 
+  console.log("apiData: ", apiData);
+
   return (
     <div className="w-full h-full">
       <Form setApiData={setApiData} />

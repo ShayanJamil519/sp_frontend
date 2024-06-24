@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 // import dynamic from "next/dynamic";
 // const ReactApexChart = dynamic(() => import("react-apexcharts"), {
@@ -7,20 +7,8 @@ import ReactApexChart from "react-apexcharts";
 // });
 
 const ChartThree = ({ apiData }) => {
-  const {
-    condition_factor,
-    coverage_factor,
-    health_risk_score,
-    insurance_factor,
-  } = apiData?.health_risk;
-
   const [state, setState] = useState({
-    series: [
-      condition_factor,
-      coverage_factor,
-      health_risk_score,
-      insurance_factor,
-    ],
+    series: [],
   });
 
   const options = {
@@ -29,16 +17,15 @@ const ChartThree = ({ apiData }) => {
     },
     colors: ["#10B981", "#375E83", "#259AE6", "#FFA70B"],
     labels: [
-      "condition_factor",
-      "coverage_factor",
-      "health_risk_score",
-      "insurance_factor",
+      "Condition Factor",
+      "Coverage Factor",
+      "Health Risk Score",
+      "Insurance Factor",
     ],
     legend: {
       show: true,
       position: "bottom",
     },
-
     plotOptions: {
       pie: {
         donut: {
@@ -69,6 +56,26 @@ const ChartThree = ({ apiData }) => {
       },
     ],
   };
+
+  useEffect(() => {
+    if (apiData?.health_risk) {
+      const {
+        condition_factor,
+        coverage_factor,
+        health_risk_score,
+        insurance_factor,
+      } = apiData.health_risk;
+
+      setState({
+        series: [
+          condition_factor,
+          coverage_factor,
+          health_risk_score,
+          insurance_factor,
+        ],
+      });
+    }
+  }, [apiData]);
 
   return (
     <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pt-7 pb-5  sm:px-7 xl:col-span-5 font-poppins">
