@@ -1,18 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactApexChart from "react-apexcharts";
 
 const ChartOne = ({ apiData }) => {
-  const { high, low, medium } = apiData?.risk_category_distribution;
-
-  // Convert numbers to two decimal places
-  const formattedData = [high, low, medium];
-
   const [state, setState] = useState({
     series: [
       {
-        data: formattedData,
+        data: [],
       },
     ],
     options: {
@@ -56,13 +51,19 @@ const ChartOne = ({ apiData }) => {
     },
   });
 
-  const handleReset = () => {
-    setState((prevState) => ({
-      ...prevState,
-    }));
-  };
-
-  handleReset;
+  useEffect(() => {
+    if (apiData?.risk_category_distribution) {
+      const { high, low, medium } = apiData.risk_category_distribution;
+      setState((prevState) => ({
+        ...prevState,
+        series: [
+          {
+            data: [high, low, medium],
+          },
+        ],
+      }));
+    }
+  }, [apiData]);
 
   return (
     <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pt-7 pb-5 shadow-sm sm:px-7 ">

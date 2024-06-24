@@ -1,13 +1,20 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactApexChart from "react-apexcharts";
 
 const ChartThree = ({ apiData }) => {
-  const { high, low, medium } = apiData?.risk_category_distribution;
-
   const [state, setState] = useState({
-    series: [high, medium, low],
+    series: [],
   });
+
+  useEffect(() => {
+    if (apiData?.risk_category_distribution) {
+      const { high, medium, low } = apiData.risk_category_distribution;
+      setState({
+        series: [high, medium, low],
+      });
+    }
+  }, [apiData]);
 
   const options = {
     chart: {
@@ -19,7 +26,6 @@ const ChartThree = ({ apiData }) => {
       show: true,
       position: "bottom",
     },
-
     plotOptions: {
       pie: {
         donut: {
